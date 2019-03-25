@@ -10,6 +10,11 @@ height = 0.5
 radius = 0.25
 
 [node name="Spatial" type="RigidBody"]
+collision_layer = 2
+collision_mask = 5
+mass = 1.75204
+continuous_cd = true
+can_sleep = false
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

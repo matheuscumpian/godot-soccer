@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Campo.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Bola.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Cubedude.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Gol.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Models/Goal/GoalBlue.material" type="Material" id=5]
 
 [node name="Game" type="Spatial"]
 
@@ -13,3 +16,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161018, 4.15397, -0.256746 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248253, 5.69094, 14.3853 )
 
+[node name="Player" type="Spatial" parent="."]
+
+[node name="Cubedude" parent="Player" instance=ExtResource( 3 )]
+
+[node name="Gols" type="Spatial" parent="."]
+
+[node name="Gol" parent="Gols" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, -8.36111, -0.107476, 0.0546886 )
+
+[node name="Gol2" parent="Gols" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 8.377, 0, -0.014 )
+
+[node name="Goal" parent="Gols/Gol2" index="0"]
+material/0 = ExtResource( 5 )
+
+
+[editable path="Gols/Gol2"]

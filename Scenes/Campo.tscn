@@ -4,7 +4,7 @@
 
 [sub_resource type="PhysicsMaterial" id=4]
 rough = true
-bounce = 1.0
+bounce = 0.8
 
 [sub_resource type="PlaneMesh" id=2]
 material = ExtResource( 1 )
