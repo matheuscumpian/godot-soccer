@@ -2,10 +2,16 @@ extends KinematicBody
 
 
 var motion = Vector3()
-export var speed = 10
+export var speed = 12
+export var animaton_speed = 20
 const GRAVITY = -5
+const EPSILON = 0.0001
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	move_lock_y
+	rotation_degrees = Vector3()
+	
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -13,6 +19,13 @@ func _physics_process(delta):
 	move()
 	fall()
 	
+	
+	pass
+	
+func _process(delta):
+	
+	
+	animate()
 	
 	pass
 	
@@ -59,3 +72,18 @@ func fall():
 
 
 	pass	
+	
+	
+func animate():
+	
+	if not motion.z == 0 or not motion.x == 0:
+		if motion.length() > EPSILON:
+			$AnimationPlayer.play("Arms Cross Walk")
+		look_at(Vector3(-motion.x, 0, -motion.z) * animaton_speed, Vector3.UP)
+	else:
+		$AnimationPlayer.stop()
+		
+	
+	
+	
+	pass

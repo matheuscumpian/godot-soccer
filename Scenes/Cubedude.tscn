@@ -8,7 +8,7 @@ margin = 0.126
 radius = 0.457906
 height = 1.25
 
-[node name="Cubedude" index="0" instance=ExtResource( 1 )]
+[node name="Cubedude" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, -0.0212979, -0.0195414, -0.0109692 )
 collision_layer = 4
 collision_mask = 7
