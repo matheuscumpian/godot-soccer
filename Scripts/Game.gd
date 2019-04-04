@@ -30,3 +30,19 @@ func _on_Area_body_exited(body):
 		$BolaPresa.stop()
 	
 	pass 
+
+func _on_Gol_body_entered(body, goal_id):
+	
+	if(goal_id == 1):
+		print("Gol 1")
+	else:
+		print("Gol 2")
+		
+	$Bola.axis_lock_angular_x = true
+	$Bola.axis_lock_angular_z = true
+	$Bola.axis_lock_angular_y = true
+	$Bola.axis_lock_linear_x = true
+	$Bola.axis_lock_linear_y = true
+	$Bola.axis_lock_linear_z = true
+	
+	pass
