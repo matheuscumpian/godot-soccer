@@ -7,6 +7,7 @@ signal Goal(Player_id)
 func _ready():
 	reset_pitch()
 	Global.Root = self
+	$GUI.connect("finished",self,"_on_game_finished")
 	pass
 
 func reset_pitch():
@@ -52,8 +53,9 @@ func _on_Gol_body_entered(body, goal_id):
 	
 	if(goal_id == 1):
 		print("Gol 1")
+		emit_signal('Goal', goal_id)
 	else:
-		print("Gol 2")
+		emit_signal('Goal', goal_id)
 		
 	lock_ball(true)
 
@@ -77,3 +79,12 @@ func lock_ball(is_locked : bool):
 	
 	
 	pass
+	
+func _on_game_finished():
+	
+	
+	
+	pass
+
+
+
