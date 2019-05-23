@@ -4,18 +4,19 @@ extends CanvasLayer
 # var a = 2
 var gols_a = 0
 var gols_b = 0
-signal finished
+var player_id
+signal finished(player_id)
+signal restart
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$NinePatchRect/Label.text = str(0)
 	$NinePatchRect/Label3.text = str(0)
 	var gols = get_tree().get_root().find_node('Game',true,false)
 	gols.connect("Goal",self,"_on_goal_entered")
-	
 	pass 
 
 #func _process(delta):
-	pass
+	
 
 func _on_goal_entered(goal_id):
 	
@@ -26,10 +27,18 @@ func _on_goal_entered(goal_id):
 		gols_b += 1
 		$NinePatchRect/Label3.text = str(gols_b)
 	
-	if(gols_a == 3 or gols_b == 3):
-		
-		emit_signal("finished")
-		
+	if gols_a == 3:
+		player_id = 2
+		emit_signal("finished", player_id)
+		$Popup.popup_centered()
+	if gols_b == 3:
+		player_id = 1
+		emit_signal("finished", player_id)
+		$Popup.popup_centered()
 		pass
 	
 	pass
+
+func _on_Button_pressed():
+	emit_signal("restart")
+	pass # Replace with function body.

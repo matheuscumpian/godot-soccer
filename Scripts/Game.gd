@@ -8,6 +8,7 @@ func _ready():
 	reset_pitch()
 	Global.Root = self
 	$GUI.connect("finished",self,"_on_game_finished")
+	$GUI.connect("restart",self,"_on_game_restart")
 	pass
 
 func reset_pitch():
@@ -80,11 +81,15 @@ func lock_ball(is_locked : bool):
 	
 	pass
 	
-func _on_game_finished():
+func _on_game_finished(player_id):
 	
-	
+	print("Cabou o jogo, o vencedor foi o jogador %s" % str(player_id))
+	get_tree().paused = true
+
 	
 	pass
-
-
+func _on_game_restart():
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+	
 
