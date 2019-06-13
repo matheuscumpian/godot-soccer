@@ -30,10 +30,12 @@ func _on_goal_entered(goal_id):
 	if gols_a == 3:
 		player_id = 2
 		emit_signal("finished", player_id)
+		$Popup/Label.text = "Player 2 wins !"
 		$Popup.popup_centered()
 	if gols_b == 3:
 		player_id = 1
 		emit_signal("finished", player_id)
+		$Popup/Label.text = "Player 1 wins !"
 		$Popup.popup_centered()
 		pass
 	
@@ -41,4 +43,9 @@ func _on_goal_entered(goal_id):
 
 func _on_Button_pressed():
 	emit_signal("restart")
+	pass # Replace with function body.
+
+
+func _on_Button2_pressed():
+	get_tree().quit()
 	pass # Replace with function body.

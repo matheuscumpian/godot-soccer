@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Campo.tscn" type="PackedScene" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://Scenes/Gol.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Models/Goal/GoalBlue.material" type="Material" id=7]
 [ext_resource path="res://Scenes/GUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Advert.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Bear.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/floor_material.tres" type="Material" id=12]
+[ext_resource path="res://Scenes/backwall.tres" type="Material" id=13]
+[ext_resource path="res://tripe.tres" type="Material" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Arms Cross Walk"
@@ -258,10 +264,21 @@ tracks/16/keys = PoolRealArray( 0, 1, 3.18323e-011, -3.63798e-012, 5.96046e-008,
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 1.25234, 2.08451 )
 
+[sub_resource type="PlaneMesh" id=4]
+size = Vector2( 100, 100 )
+
+[sub_resource type="PlaneMesh" id=5]
+material = ExtResource( 13 )
+size = Vector2( 75, 50 )
+
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 50, 0.5, 20 )
+
 [node name="Game" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="Campo" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00339699, 0.0642431, 0.00213778 )
 
 [node name="Bola" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161018, 4.15397, -0.256746 )
@@ -270,6 +287,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161018, 4.15397, -0.256746 
 transform = Transform( 1, 0, 0, 0, 0.995307, 0.096769, 0, -0.096769, 0.995307, -0.248253, 6.54413, 15.0801 )
 
 [node name="Player" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="Cubedude" parent="Player" groups=[
 "Player",
@@ -301,15 +319,6 @@ transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 8.377
 [node name="Goal" parent="Gols/Gol2" index="0"]
 material/0 = ExtResource( 7 )
 
-[node name="DirectionalLight" type="SpotLight" parent="."]
-transform = Transform( -0.831296, 0.546879, 0.0993498, -0.388208, -0.699174, 0.600375, 0.397795, 0.460521, 0.793523, 9.50358, 7.507, 10.6527 )
-light_color = Color( 1, 0.772549, 0.560784, 1 )
-light_energy = 1.38
-shadow_enabled = true
-shadow_color = Color( 0.317647, 0.266667, 0.266667, 1 )
-spot_range = 27.9
-spot_angle = 72.3
-
 [node name="Area" type="Area" parent="."]
 editor/display_folded = true
 collision_layer = 0
@@ -334,6 +343,7 @@ one_shot = true
 one_shot = true
 
 [node name="StartPositions" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Ball" type="Position3D" parent="StartPositions"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.08434, 0 )
@@ -345,6 +355,54 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75423, 1.7197, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82886, 1.7197, 0 )
 
 [node name="GUI" parent="." instance=ExtResource( 8 )]
+
+[node name="Decoracao" type="Node" parent="."]
+
+[node name="Block" parent="Decoracao" instance=ExtResource( 9 )]
+transform = Transform( 0.96829, 0, -0.249829, 0, 1, 0, 0.249829, 0, 0.96829, 11.4529, 1.94966, -6.88576 )
+
+[node name="Advert" parent="Decoracao" instance=ExtResource( 10 )]
+transform = Transform( 2.07189, 0, -0.0246928, 0, 2.07204, 0, 0.0119172, 0, 0.999931, -0.202945, 0.580328, -8.35719 )
+
+[node name="Bear" parent="Decoracao" instance=ExtResource( 11 )]
+transform = Transform( -1.20348, 0, -1.01056, 0, 1.93132, 0, 1.01056, 0, -1.20348, -5.34313, 0.319067, -10.6638 )
+
+[node name="floor" type="MeshInstance" parent="Decoracao"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0481032, 0 )
+mesh = SubResource( 4 )
+material/0 = ExtResource( 12 )
+
+[node name="backwall" type="MeshInstance" parent="Decoracao"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, -12 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="Decoracao"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.299126, -17.713 )
+mesh = SubResource( 6 )
+material/0 = ExtResource( 14 )
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="DirectionalLight" type="SpotLight" parent="Lights"]
+transform = Transform( -0.751373, 0.59476, 0.28583, -0.398872, -0.754425, 0.521291, 0.52568, 0.277674, 0.804088, 9.50358, 7.507, 10.6527 )
+light_color = Color( 1, 0.772549, 0.560784, 1 )
+light_energy = 3.63
+light_indirect_energy = 1.8
+light_specular = 0.56
+shadow_enabled = true
+shadow_color = Color( 0.227451, 0.270588, 0.392157, 1 )
+spot_range = 22.6661
+spot_angle = 72.3
+
+[node name="SpotLight" type="SpotLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -0.204328, 0.978902, 0, -0.978902, -0.204328, -0.665922, 25.8532, -11.2052 )
+light_color = Color( 0.490196, 0.396078, 0.517647, 1 )
+light_energy = 8.0
+light_indirect_energy = 5.75
+shadow_color = Color( 0.454902, 0.427451, 0.427451, 1 )
+spot_range = 27.7222
+spot_angle = 54.9457
 [connection signal="body_entered" from="Gols/Gol/Area" to="." method="_on_Gol_body_entered" binds= [ 1 ]]
 [connection signal="body_entered" from="Gols/Gol2/Area" to="." method="_on_Gol_body_entered" binds= [ 2 ]]
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered" binds= [ 1 ]]
